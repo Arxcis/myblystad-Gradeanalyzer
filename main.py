@@ -1,14 +1,3 @@
-
-import pandas as pd
-import matplotlib.pyplot as plt
-from spire.doc import *
-from tkinter import Tk
-from tkinter.filedialog import askopenfilename
-from scipy.stats import ttest_rel
-
-
-
-
 def sig():
     ttest = ttest_rel(grade_df[f'{kategori1}'], grade_df[f'{kategori2}'])
     degrees_freedom = (grade_df.shape[0] - 1)
@@ -29,7 +18,7 @@ input("Trykk en tast for å velge excel fil. ")
 root = Tk()
 filename = askopenfilename()  # show an "Open" dialog box and return the path to the selected file
 
-if not len(filename) < 4:
+if len(filename) < 4:
     filename = askopenfilename()
 else:
     pass
@@ -40,7 +29,7 @@ Tk().quit()
 kategori1 = input("Hva er tittelen på første karakter kategori? Bruk ordrett tittel fra kolonnens første celle. ")
 kategori2 = input("Hva er tittelen på andre karakter kategori? Bruk ordrett tittel fra kolonnens første celle. ")
 
-print(filename)
+
 
 document = Document()
 
