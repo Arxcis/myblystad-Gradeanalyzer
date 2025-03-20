@@ -33,8 +33,9 @@ file_name, file_extension = os.path.splitext(filename)
 print(file_name)
 print(file_extension)
 
-while file_extension != ".xlsx" or ".xls":
+while file_extension not in (".xlsx", ".xls"):
     filename = askopenfilename()
+    file_name, file_extension = os.path.splitext(filename)
 else:
     pass
 
@@ -106,13 +107,13 @@ else:
     pass
 
 content_paragraph2024 = section.AddParagraph()
-content_paragraph2024.AppendText(f"\nGjennomsnitt karakter for {kategori1} er: " + str(
-    grade_df[f'{kategori1}'].mean()) + "\n" + "Standardavvik er " + str(grade_df[f'{kategori1}'].std()) + ".")
+content_paragraph2024.AppendText(f"\nGjennomsnittskarakter for {kategori1} er: " + str(
+    grade_df[f'{kategori1}'].mean()) + "."+ "\n" + "Standardavvik er " + str(grade_df[f'{kategori1}'].std()) + ".")
 content_paragraph2024.AppendText("\nDet var totalt " + str(count6) + " som fikk toppkarakter.")
 
 content_paragraph2027 = section.AddParagraph()
-content_paragraph2027.AppendText(f"\nGjennomsnitt karakter {kategori2} er: " + str(
-    grade_df[f'{kategori2}'].mean()) + "\n" + "Standardavvik er " + str(grade_df['Avansert'].std()) + ".")
+content_paragraph2027.AppendText(f"\nGjennomsnittskarakter for {kategori2} er: " + str(
+    grade_df[f'{kategori2}'].mean()) + "."+ "\n" + "Standardavvik er " + str(grade_df['Avansert'].std()) + ".")
 content_paragraph2027.AppendText("\nDet var totalt " + str(count6k2) + " som fikk toppkarakter.")
 
 if stryk_kat2_count > 0:
