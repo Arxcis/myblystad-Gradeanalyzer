@@ -13,7 +13,7 @@ def sig():
     ttest = ttest_rel(grade_df[f'{kategori1}'], grade_df[f'{kategori2}'])
     degrees_freedom = (grade_df.shape[0] - 1)
     content_paragraph2030 = section.AddParagraph()
-    content_paragraph2030.AppendText("En t-test ble kjørt for å sjekke forskjeller mellomgruppene")
+    content_paragraph2030.AppendText("En t-test ble kjørt for å sjekke forskjeller mellomgruppene. ")
     content_paragraph2030.AppendText(
         f"T testen er tohalet og basert på parrete verdier (paired sample):\n p= {ttest[1]}, df = {degrees_freedom}")
     if 0.05 < ttest[1]:
@@ -23,15 +23,12 @@ def sig():
 
 
 print(
-    "Velkommen til den automatiske rapporten for karakter endring.\nProgrammet skriver automatisk raport med deskriptiv statistikk til to grupper/kategorier av karakterer (f.eks to forskjellige år, arbeidskrav eller kategori av vanskelighet).\nEt boxplot blir så generert basert på karakterene.\nDeretter kjøres en paret t-test for å se etter signifikante forskjeller.\nTil sist lagres rapporten i et word-kompatibelt format.")
+    "Velkommen til den automatiske rapporten for karakter endring.\nProgrammet skriver automatisk raport med deskriptiv statistikk til to grupper/kategorier av karakterer (f.eks to forskjellige år, arbeidskrav eller kategori av vanskelighet).\nEt boxplot blir så generert basert på karakterene.\nDeretter kjøres en paret t-test for å se etter signifikante forskjeller.\nTil sist lagres rapporten i et word-kompatibelt format, i mappen Output.")
 
 input("Trykk en tast for å velge excel fil. ")
 root = Tk()
 filename = askopenfilename()
 file_name, file_extension = os.path.splitext(filename)
-
-print(file_name)
-print(file_extension)
 
 while file_extension not in (".xlsx", ".xls"):
     filename = askopenfilename()
@@ -51,7 +48,7 @@ document = Document()
 
 section = document.AddSection()
 section.PageSetup.Margins.All = 72
-title = input("Hvilket år gjelder rapporten for.")
+
 grade_df = pd.read_excel(f'{filename}', usecols='A, B')
 
 while kategori1 not in grade_df.columns:
@@ -63,6 +60,7 @@ while kategori2 not in grade_df.columns:
         f"Gjenta tittelen på andre karakter kategori. {kategori2} er ikke riktig. Bruk ordrett tittel fra kolonnens tittel celle. ")
 
 titleParagraph = section.AddParagraph()
+title = input("Hvilket år gjelder rapporten for.")
 titleParagraph.AppendText(f"Rapport for år {title} - {kategori1} og {kategori2}")
 titleParagraph = titleParagraph.ApplyStyle(BuiltinStyle.Heading1)
 
@@ -70,34 +68,34 @@ content_paragraph2023 = section.AddParagraph()
 content_paragraph2023.AppendText("\n" + f"Karakter er lagret i: {filename}" + "\n")
 
 if 1 in grade_df[f'{kategori1}'].unique():
-    print(f"Stryk registrert i kategorien {kategori1}")
+
     stryk_kat1 = True
     stryk_kat1_count = grade_df[f'{kategori1}'].value_counts().get("1")
-    print("Antall stryk:", stryk_kat1_count)
+
 else:
     stryk_kat1_count = 0
-    print(f"Ingen stryk i kategori {kategori1}")
+
     pass
 count6 = 0
 for cell in grade_df[f'{kategori1}']:
     if cell == 6:
         count6 += 1
-print(count6)
+
 
 if 1 in grade_df[f'{kategori2}'].unique():
-    print(f"Stryk registrert i kategorien {kategori2}")
+
     stryk_kat2 = True
     stryk_kat2_count = grade_df[f'{kategori2}'].value_counts().get("1")
-    print("Antall stryk:", stryk_kat2_count)
+
 else:
     stryk_kat2_count = 0
-    print(f"Ingen stryk kategorien {kategori2}")
+
     pass
 count6k2 = 0
 for cell in grade_df[f'{kategori2}']:
     if cell == 6:
         count6k2 += 1
-print(count6k2)
+
 
 if stryk_kat1_count > 0:
     content_paragraph2026 = section.AddParagraph()
