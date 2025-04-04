@@ -58,6 +58,7 @@ Dette Python-programmet analyserer karakterdata fra en Excel-fil, genererer stat
 6. En Word-rapport opprettes automatisk med alle analyseresultatene i output mappen.
 
 **Demo:**
+
 0. Last ned dummy.xls fra github repo, lagre denne lokalt.
 1. Start programmet, og velg dummy.xls som excel fil. Kategoriene i denne er: "Grunnleggende" og " Avansert".  
 2. Angi de eksakte kolonnenavnene (i.e. "Grunnleggende" og " Avansert")  for de to kategoriene som skal sammenlignes.  
